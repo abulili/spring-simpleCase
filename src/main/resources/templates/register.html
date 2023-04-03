@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="register-box">
+        注册界面
+        姓名<input type="text" id="UserName2">
+        密码<input type="password" id="Password2">
+        确认密码<input type="password" id="Password22">
+        <button type="button" onclick="registerForm()">立即注册</button>
+    </div>
+<script>
+            async function registerForm() {
+            var UserName2 = document.getElementById("UserName2").value;
+            var Password2 = document.getElementById("Password2").value;
+            var Password22 = document.getElementById("Password22").value;
+            if(Password2 === Password22) {
+                var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+                if (!regex.test(Password22)) {
+                  alert("密码必须包含大小写字母数字且长度在 6 位以上");
+                }
+                else {
+                    url = "http://localhost:8080/API/work1/registerCheck" + "/" + UserName2;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    data.toString();
+                    if(data != null && data.userName === UserName2){
+                       alert("用户已存在");
+                     }
+                    else{
+                        //插入
+                        url = "http://localhost:8080/API/work1/insertUser" + "/" + UserName2 + "/" + Password2;
+                        await fetch(url);
+                        alert("已成功注册，请开始登录使用吧");
+                        window.location="[[@{/API/work1/login}]]";
+                    }
+                }
+            }
+            else {
+                alert("两次密码输入不一致，请重新输入密码");
+                document.getElementById('Password22').value = '';
+                document.getElementById('Password2').value = '';
+            }
+        }
+</script>
+</body>
+</html>

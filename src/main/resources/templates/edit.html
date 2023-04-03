@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+员工编辑页面
+<!--    <form th:each="employees:${Employee}" id="edit1" >-->
+<!--                        工号<input type="text" th:value="${employees.employeeId}" id="employeeId1" readonly="true">-->
+<!--                        姓名<input type="text" th:value="${employees.employeeName}" id="employeeName1" >-->
+<!--                        性别<input type="text" th:value="${employees.gender}" id="gender1" >-->
+<!--                        年龄<input type="text" th:value="${employees.age}" id="age1" >-->
+<!--                        基础工资<input type="text" th:value="${employees.baseSalary}" id="baseSalary1" >-->
+<!--                        地点号<input type="text" th:value="${employees.locationId}" id="locationId1">-->
+<!--                        <button type="button" onclick="change()">Save</button>-->
+<!--    </form>-->
+
+<!--    <form id="edit2" style="display:none">-->
+
+<!--rem-remark-->
+    <form id="edit2">
+        工号<input type="text"  id="employeeId2">
+        姓名<input type="text"  id="employeeName2">
+        性别<input type="text"  id="gender2">
+        年龄<input type="text"  id="age2">
+        基础工资<input type="text" id="baseSalary2">
+        地点号<input type="text"  id="locationId2">
+        <button type="button" onclick="add()">Save</button>
+    </form>
+<script>
+<!--    window.onload = function(){-->
+<!--        if(!document.getElementById("edit1")) {-->
+<!--            var edit2 = document.getElementById("edit2");-->
+<!--            edit2.style.display = "block";-->
+<!--        }-->
+<!--    }-->
+    async function change(){
+        var employeeId1 = document.getElementById("employeeId1").value.toString();
+        var employeeName1 = document.getElementById("employeeName1").value;
+        var gender1 = document.getElementById("gender1").value;
+        var age1 = document.getElementById("age1").value;
+        var baseSalary1 = document.getElementById("baseSalary1").value;
+        var locationId1 = document.getElementById("locationId1").value;
+        url = "http://localhost:8080/API/work1/updateEmployee" + "/" + employeeId2 + "/" + employeeName2 + "/" + gender2 + "/" + age2 + "/" + baseSalary2 + "/" + locationId2;
+        await fetch(url);
+<!--        window.location="[[@{/API/work1/Manage}]]";-->
+    }
+    async function add(){
+        var employeeId2 = document.getElementById("employeeId2").value;
+        var employeeName2 = document.getElementById("employeeName2").value;
+        var gender2 = document.getElementById("gender2").value;
+        var age2 = document.getElementById("age2").value;
+        var baseSalary2 = document.getElementById("baseSalary2").value;
+        var locationId2 = document.getElementById("locationId2").value;
+        if(employeeId2 != "" && employeeName2 != "") {
+            url = "http://localhost:8080/API/work1/edit/addEmployee" + "/" + employeeId2 + "/" + employeeName2 + "/" + gender2 + "/" + age2 + "/" + baseSalary2 + "/" + locationId2;
+            await fetch(url);
+            window.location="[[@{/API/work1/Manage}]]";
+<!--            alert("??");-->
+        }
+        else {
+            alert("不能为空！");
+        }
+    }
+</script>
+</body>
+</html>

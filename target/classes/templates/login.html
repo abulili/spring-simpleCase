@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="login-box">
+        登录界面
+        姓名<input type="text" id="UserName1">
+        密码<input type="password" id="Password1">
+        <button type="submit" onclick="loginForm()">登录</button>
+        <button type="button" onclick="registerForm()">注册</button>
+    </div>
+
+    <div id="temp"></div>
+    <script type="text/javascript">
+        async function loginForm(){
+            var UserName1 = document.getElementById("UserName1").value;
+            var Password1 = document.getElementById("Password1").value;
+            //console.log(UserName1 + " " + Password1);
+            url = "http://localhost:8080/API/work1/loginCheck" + "/" + UserName1 + "/" + Password1;
+            const response = await fetch(url);
+            const data = await response.json();
+            data.toString();
+            if(data != null && data.userName === UserName1){
+               window.location="[[@{/API/work1/index}]]";
+             }
+            else{
+                alert("用户不存在或密码错误");
+            }
+        }
+        function registerForm(){
+            window.location="[[@{/API/work1/register}]]";
+        }
+    </script>
+</body>
+</html>
