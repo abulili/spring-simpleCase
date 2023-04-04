@@ -8,25 +8,10 @@
         body{height:100%;margin:0px;padding:0px}
         #container{height:50%}
   </style>
-<!--    destination要传值，这是驾车规划，点了才执行-->
-<!--    <script src="https://api.map.baidu.com/direction/v2/driving?origin=29.56574,103.738152&destination=39.936404,116.452562&ak=您的AK"></script>-->
-<!--    <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=urmCFfLQ89nSev9oBTgHz47Hyha8xZhw"></script>-->
     <script type="text/javascript" src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=urmCFfLQ89nSev9oBTgHz47Hyha8xZhw"></script>
 </head>
 <body>
-    百度地图
-<!--    "lat":29.56574,-->
-<!--    "lng":103.738152    -->
-<!--    <form th:each="employees:${EandL}" id="edit1" >-->
-<!--                            <input type="text" th:value="${employees.employeeName}" id="employeeName1" >-->
-<!--                            <input type="text" th:value="${employees.gender}" id="gender1" >-->
-<!--                            <input type="text" th:value="${employees.baseSalary}" id="baseSalary1" >-->
-<!--                            <input type="text" th:value="${employees.locationName}" id="locationId1">-->
-<!--        <input type="text" th:value="${employees.latitude}" id="lat">-->
-<!--        <input type="text" th:value="${employees.longitude}" id="long">-->
-<!--        <input type="text" id="buzhu">-->
-<!--        <input type="text"  id="money">-->
-<!--        </form>-->
+    百度地图 <a th:href="@{/API/work1/Manage}">回到员工管理界面</a>
     <th:block th:each="employees:${EandL}">
         <tr>
             姓名<td>[[${employees.employeeName}]]</td>
@@ -35,66 +20,58 @@
             地点名称<td>[[${employees.locationName}]]</td>
             差旅补助<td><p id="buzhu"></p></td>
             总工资<td><p id="money"></p></td>
-            <td id="lat">[[${employees.latitude}]]</td> <td id="long">[[${employees.longitude}]]</td>
+            <td><p id="lat">[[${employees.latitude}]]</p></td> <td><p id="lng">[[${employees.longitude}]]</p></td>
         </tr>
     </th:block>
     地图
     <div id="container"></div>
     <script>
-        //成理工程坐标
-<!--        var c_lat = 29.56574;-->
-<!--        var c_lng = 103.738152; //如果出错就是要改String-->
+        window.onload = function(){
+            var c_lat = 29.56574;
+            var c_lng = 103.738152;
 
-          var map = new BMapGL.Map("container");
-<!--          // lng lat (经度 纬度)-->
-<!--          var point = new BMapGL.Point(c_lng, c_lat);-->
-<!--          // Zoom：放大缩小-->
-<!--          map.centerAndZoom(point, 15);-->
-<!--          var marker = new BMapGL.Marker(point);        // 创建标注-->
-<!--          map.addOverlay(marker);                     // 将标注添加到地图中-->
+            var lat = document.getElementById("lat").innerHTML;
+            var lng = document.getElementById("lng").innerHTML;
+            lat = Number(lat);
+            lng = Number(lng);
 
-<!--        //计算工资-->
-<!--        要取得横纵坐标的值-->
-<!--        //这个人的坐标-->
-<!--        var lat = document.getElementById("lat").value;-->
-<!--        var lng = document.getElementById("long").value;-->
-<!--        //开始打标记-->
-<!--        point = new BMapGL.Point(lng, lat);-->
-<!--        map.centerAndZoom(point, 15);-->
-<!--        marker = new BMapGL.Marker(point);-->
-<!--        map.addOverlay(marker);-->
-
-<!--        //驾车规划-->
-        let output = "";
-        let money;
-        map.centerAndZoom(new BMapGL.Point(103.738152, 29.56574), 15);
-        var searchComplete = function (results){
-            if (transit.getStatus() != BMAP_STATUS_SUCCESS){
-                return ;
-            }
-            var plan = results.getPlan(0);
-            output += "总路程为：" ;
-            money = plan.getDistance(true).toString();
-            output += plan.getDistance(true) + "\n";             //获取距离
-        }
-        var transit = new BMapGL.DrivingRoute(map, {renderOptions: {map: map},
-            onSearchComplete: searchComplete,
-            onPolylinesSet: function(){
-                setTimeout(function(){
-<!--                    alert(output)-->
-<!--                算工资-->
-                alert(money)
-                if(money >= "20km") {
-                    document.getElementById("buzhu").innerHTML = "500";
-                    var base = document.getElementById("baseSalary1").innerHTML;
-                    base = Number(base);
-                    document.getElementById("money").innerHTML = (500 + base).toString();
+            var map = new BMapGL.Map("container");
+            var money;
+            map.centerAndZoom(new BMapGL.Point(c_lng, c_lat), 15);
+            var searchComplete = function (results){
+                console.log(results);
+                console.log(lat + " " + lng);
+                if (transit.getStatus() != BMAP_STATUS_SUCCESS){
+                    console.log(lat + " " + lng);
+                    console.log("到底是为什么");
+                    return ;
                 }
-                },"1000");
-        }});
-        var start=new BMapGL.Point(103.738152,29.56574);
-        var end=new BMapGL.Point(103.82673,29.270851);
-        transit.search(start, end);
+                var plan = results.getPlan(0);
+                console.log("?");
+                money = plan.getDistance(true).toString();
+            }
+            var transit = new BMapGL.DrivingRoute(map, {renderOptions: {map: map},
+                onSearchComplete: searchComplete,
+                onPolylinesSet: function(){
+                    setTimeout(function(){
+                    alert(money)
+                    if(money >= "20km") {
+                        document.getElementById("buzhu").innerHTML = "有";
+                        var base = document.getElementById("baseSalary1").innerHTML;
+                        base = Number(base);
+                        document.getElementById("money").innerHTML = (500 + base).toString();
+                    }
+                    else {
+                            document.getElementById("buzhu").innerHTML = "无";
+                            var base = document.getElementById("baseSalary1").innerHTML;
+                            document.getElementById("money").innerHTML = base;
+                    }
+                    },"1000");
+            }});
+            var start=new BMapGL.Point(c_lng,c_lat);
+            var end=new BMapGL.Point(lng,lat);
+            transit.search(start, end);
+        }
     </script>
 </body>
 </html>
