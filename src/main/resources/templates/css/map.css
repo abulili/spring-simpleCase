@@ -1,0 +1,13 @@
+html{height:100%}
+
+body{height:100%;margin:0px;padding:0px}
+
+#container{height:50%}
+
+h2, h3 {
+    text-align: center;
+}
+
+th, td {
+    text-align: center;
+}

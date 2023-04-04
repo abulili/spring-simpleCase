@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
 </head>
 <body>
-    <div id="register-box">
+    <form id="register-box">
         注册界面
         姓名<input type="text" id="UserName2">
         密码<input type="password" id="Password2">
         确认密码<input type="password" id="Password22">
         <button type="button" onclick="registerForm()">立即注册</button>
-    </div>
+    </form>
 <script>
             async function registerForm() {
             var UserName2 = document.getElementById("UserName2").value;

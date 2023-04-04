@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
-    <div id="login-box">
-        登录界面
-        姓名<input type="text" id="UserName1">
-        密码<input type="password" id="Password1">
-        <button type="submit" onclick="loginForm()">登录</button>
-        <button type="button" onclick="registerForm()">注册</button>
-    </div>
+    <h1>登录界面</h1>
+    <form id="login-box">
+        姓名&nbsp;&nbsp;&nbsp;<input type="text" id="UserName1"><br>
+        密码&nbsp;&nbsp;&nbsp;<input type="password" id="Password1">
+        <div class="button-two">
+            <button type="submit" onclick="loginForm()">登录</button> 
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" onclick="registerForm()">注册</button>
+        </div>
+    </form>
 
     <div id="temp"></div>
     <script type="text/javascript">

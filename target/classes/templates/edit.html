@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="./css/edit.css">
 </head>
 <body>
-员工编辑页面
+<h2>员工编辑页面</h2>
 <!--    <form th:each="employees:${Employee}" id="edit1" >-->
 <!--                        工号<input type="text" th:value="${employees.employeeId}" id="employeeId1" readonly="true">-->
 <!--                        姓名<input type="text" th:value="${employees.employeeName}" id="employeeName1" >-->
@@ -26,7 +30,7 @@
         年龄<input type="text"  id="age2">
         基础工资<input type="text" id="baseSalary2">
         地点号<input type="text"  id="locationId2">
-        <button type="button" onclick="add()">Save</button>
+        <div><button type="button" onclick="add()">Save</button></div>
     </form>
 <script>
 <!--这里和添加员工有点问题-->
