@@ -1,0 +1,11 @@
+h1 {
+    text-align: center;
+}
+.add {
+    position: fixed;
+    right: 2%;
+    top: 9%;
+}
+th, td {
+    text-align: center;
+}
