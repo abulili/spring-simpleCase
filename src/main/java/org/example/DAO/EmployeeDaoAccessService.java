@@ -2,12 +2,14 @@ package org.example.DAO;
 
 import org.example.Model.Employee;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository("Employee")
+@Component
 public class EmployeeDaoAccessService implements EmployeeDao{
     private final JdbcTemplate jdbcTemplate;
 

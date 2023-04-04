@@ -2,12 +2,14 @@ package org.example.DAO;
 
 import org.example.DAO.UserDao;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.example.Model.User;
 import java.util.List;
 import java.util.Optional;
 
 @Repository("mysql")
+@Component
 public class UserDaoAccessService implements UserDao {
     private final JdbcTemplate jdbcTemplate;
     public UserDaoAccessService(JdbcTemplate jdbcTemplate) {

@@ -39,22 +39,16 @@
             var money;
             map.centerAndZoom(new BMapGL.Point(c_lng, c_lat), 15);
             var searchComplete = function (results){
-                console.log(results);
-                console.log(lat + " " + lng);
                 if (transit.getStatus() != BMAP_STATUS_SUCCESS){
-                    console.log(lat + " " + lng);
-                    console.log("到底是为什么");
                     return ;
                 }
                 var plan = results.getPlan(0);
-                console.log("?");
                 money = plan.getDistance(true).toString();
             }
             var transit = new BMapGL.DrivingRoute(map, {renderOptions: {map: map},
                 onSearchComplete: searchComplete,
                 onPolylinesSet: function(){
                     setTimeout(function(){
-                    alert(money)
                     if(money >= "20km") {
                         document.getElementById("buzhu").innerHTML = "有";
                         var base = document.getElementById("baseSalary1").innerHTML;

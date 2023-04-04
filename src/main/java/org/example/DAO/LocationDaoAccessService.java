@@ -4,6 +4,7 @@ import org.example.Model.EandL;
 import org.example.Model.Location;
 import org.example.Model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("Location")
+@Component
 public class LocationDaoAccessService implements LocationDao{
     private final JdbcTemplate jdbcTemplate;
     public LocationDaoAccessService(JdbcTemplate jdbcTemplate) {

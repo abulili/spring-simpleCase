@@ -7,7 +7,6 @@
 <body>
     员工管理界面
     <a th:href="@{/API/work1/edit/sure/null}">添加新员工</a>
-<!--    员工信息-->
     <table >
         <thead >
         <tr>
@@ -29,7 +28,7 @@
                     <td>
                         <a class="h4" th:href="@{'/API/work1/edit/sure/' + ${Employee.employeeId}}">Edit</a>
                         <a class="h4" th:href="@{'/API/work1/Manage/deleteEmployeeById/' + ${Employee.employeeId}}">Delete</a>
-                        <a class="h4" th:href="@{'/API/work1/baiduMap/serach' + ${Employee.locationId} + ${Employee.employeeId}}">ViewLocation</a>
+                        <a class="h4" th:href="@{'/API/work1/baiduMap/serach/' + ${Employee.locationId} + '/' + ${Employee.employeeId}}">ViewLocation</a>
                     </td>
                 </tr>
             </th:block>

@@ -9,8 +9,6 @@
         https://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
-    <!-- 1、自动扫包 -->
     <context:component-scan base-package="org.example.AOP"></context:component-scan>
-    <!--    2、开启自动生成代理-因为要生成代理类-->
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>
