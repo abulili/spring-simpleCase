@@ -1,9 +1,13 @@
 package org.example.API;
 
+import org.example.Model.EandL;
 import org.example.Model.Employee;
+import org.example.Model.Location;
 import org.example.Model.User;
 import org.example.Service.EmployDBService;
+import org.example.Service.LocationDBService;
 import org.example.Service.UserDBService;
+import org.example.Service.BaiduMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +22,12 @@ import java.util.Optional;
 public class Controller {
     private UserDBService userDBService;
     private EmployDBService employDBService;
+    private LocationDBService locationDBService;
     @Autowired
-    public Controller(UserDBService userDBService, EmployDBService employDBService) {
+    public Controller(UserDBService userDBService, EmployDBService employDBService, LocationDBService locationDBService) {
         this.userDBService = userDBService;
         this.employDBService = employDBService;
+        this.locationDBService = locationDBService;
     }
 //    user
     //login
@@ -63,6 +69,8 @@ public class Controller {
 //    public void updateEmployee(@PathVariable("employeeId") String employeeId, @PathVariable("employeeName") String employeeName,@PathVariable("gender") String gender,@PathVariable("age") String age,@PathVariable("baseSalary") String baseSalary, @PathVariable("locationId") String locationId) {
 //        employDBService.updateEmployee(employeeId,employeeName, gender,age,baseSalary,locationId);
 //    }
+    //map
+
 
     //    页面
     @GetMapping("login")
@@ -89,9 +97,17 @@ public class Controller {
         model.addAttribute("Employee", employees);
         return "edit";
     }
-    @GetMapping("baiduMap/{locationId}")
-    public String baiduMap(String locationId) {
-        //进行操作
+    @GetMapping("baiduMap/serach/{locationId}/{employeeId}")
+    public String baiduMapSerach(@PathVariable("locationId")String locationId, @PathVariable("employeeId")String employeeId,Model model) {
+        //唔该怎么找
+//        从数据库里取出来
+//        Optional<Location> locations = locationDBService.selectLocationId(locationId);
+//        model1.addAttribute("Location", locations);
+        //联合查询把
+        List<EandL> employees = locationDBService.selectLocationAndEmployee(locationId, employeeId);
+        model.addAttribute("EandL", employees);
+//        return "baiduMap" + 坐标1 + 坐标2;
         return "baiduMap";
     }
+//    @GetMapping(baiduMap/{坐标1}/{坐标2}) 要把这个坐标传到前端去
 }
