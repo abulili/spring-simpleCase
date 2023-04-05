@@ -2,6 +2,7 @@ package org.example.API;
 
 import org.example.Model.EandL;
 import org.example.Model.Employee;
+import org.example.Model.Location;
 import org.example.Model.User;
 import org.example.Service.EmployDBService;
 import org.example.Service.LocationDBService;
@@ -64,6 +65,13 @@ public class Controller {
         else
         employDBService.inserEmployee(employeeId,employeeName, gender,age,baseSalary,locationId);
     }
+    @GetMapping("edit/location")
+    public String showLocation(Model model){
+        List<Location>locations = locationDBService.showAllLocation();
+        model.addAttribute("locations",locations);
+        return "edit";
+    }
+
 
     //    页面
     @GetMapping("login")

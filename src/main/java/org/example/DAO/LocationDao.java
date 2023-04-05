@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface LocationDao {
     Optional<Location> selectLocationId(String locationId);
     List<EandL> selectLocationAndEmployee(String locationId, String employee);
+    List<Location> showAllLocation();
 }

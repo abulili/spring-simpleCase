@@ -14,6 +14,9 @@
             text-align: center;
             font-size: 80px;
         }
+        a {
+            text-decoration:none;
+        }
     </style>
 </head>
 <body>
@@ -28,9 +31,28 @@
         <label>性别</label><input id="man" type="radio" checked="checked" name="sex" value="man"/>男 <input type="radio" id="woman" name="sex" value="women">女<br>
         <label>年龄</label><input type="text"  id="age2">
         <label>基础工资</label><input type="text" id="baseSalary2">
-        <label>地点号</label><input type="text"  id="locationId2">
+        <label>地点号</label><input type="text"  id="locationId2">（目前仅支持001-004）
         <div><button type="button" onclick="add()">Save</button></div>
     </form>
+
+    <div><button type="button" id="showLocation">显示所有地点</button></div>
+    <table >
+        <th>
+            <tr>
+                <th>地点号</th>
+                <th>地点名称</th>
+            </tr>
+        </th>
+        <tbody>
+            <th:block th:each="location:${locations}">
+                <tr>
+                    <td>[[${location.locationId}]]</td>
+                    <td>[[${location.locationName}]]</td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+    <button type="button" id="moreLocation">想要选取更多地点</button>
 <script>
     window.onload = function(){
         if(!document.getElementById("edit1")) {
@@ -65,11 +87,21 @@
             url = "http://localhost:8080/API/work1/edit/addEmployee" + "/" + employeeId2 + "/" + employeeName2 + "/" + gender2 + "/" + age2 + "/" + baseSalary2 + "/" + locationId2;
             await fetch(url);
             window.location="[[@{/API/work1/Manage}]]";
-<!--            alert("??");-->
         }
         else {
             alert("不能为空！");
         }
+    }
+     document.getElementById("moreLocation").onclick = function (){
+        //console.log(
+        //    "先再往dom里添个地图然后连数据库取增加地点，自动地点加一" +
+        //    ”或者直接把数据库里面的显示处理，说请联系管理员“ +
+        //    ”看情况吧，来不及就算了“
+        //)
+        alert("您没有此权限！请联系管理员对数据库进行操作");
+    }
+    document.getElementById("showLocation").onclick = function (){
+        window.location="[[@{/API/work1/edit/location}]]";
     }
 </script>
 </body>

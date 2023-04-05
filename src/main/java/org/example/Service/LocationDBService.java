@@ -23,4 +23,7 @@ public class LocationDBService {
      public List<EandL> selectLocationAndEmployee(String locationId, String employeeId) {
         return locationDao.selectLocationAndEmployee(locationId, employeeId);
     }
+    public List<Location> showAllLocation(){
+        return locationDao.showAllLocation();
+    }
 }

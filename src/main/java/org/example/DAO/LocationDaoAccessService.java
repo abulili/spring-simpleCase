@@ -50,4 +50,19 @@ public class LocationDaoAccessService implements LocationDao{
         }, employeeId);
         return EandLList;
     }
+    @Override
+    public List<Location> showAllLocation(){
+        final String sql = """
+               select * from location;
+                """;
+        List<Location> locationList = jdbcTemplate.query(sql,(resultSet, i) -> {
+            return new Location (
+                    resultSet.getString("locationId"),
+                    resultSet.getString("locationName"),
+                    resultSet.getString("latitude"),
+                    resultSet.getString("longitude")
+            );
+        });
+        return locationList;
+    }
 }
