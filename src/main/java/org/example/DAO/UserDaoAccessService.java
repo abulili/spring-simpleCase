@@ -2,9 +2,13 @@ package org.example.DAO;
 
 import org.example.DAO.UserDao;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.example.Model.User;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,5 +63,27 @@ public class UserDaoAccessService implements UserDao {
             System.out.println("Insert failed");
             return false;
         }
+    }
+    @Override
+    public User selectUserName2(String UserName) {
+        final String sql = """
+           select * from user where userName = ?;
+            """;
+        Optional<User> userOptional = jdbcTemplate.query(sql,(resultSet, i) -> {
+            return new User(
+                    resultSet.getString("userId"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password")
+            );
+        }, UserName).stream().findFirst();
+        return userOptional.orElse(null);
+    }
+    @Override
+    public UserDetails findUser(String UserName) {
+        User users = selectUserName2(UserName);
+        if(users == null) {
+            throw new UsernameNotFoundException("User not found with email: " + UserName);
+        }
+        return new org.springframework.security.core.userdetails.User(users.getUserName(), users.getPassword(), new ArrayList<>());
     }
 }

@@ -2,9 +2,11 @@ package org.example.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 @Data
+@Component
 public class User {
     @NotBlank
     private String userId, userName, password;
