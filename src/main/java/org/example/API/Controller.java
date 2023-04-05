@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
@@ -62,10 +64,6 @@ public class Controller {
         else
         employDBService.inserEmployee(employeeId,employeeName, gender,age,baseSalary,locationId);
     }
-//    @GetMapping("edit/updateEmployee/{employeeId}/{employeeName}/{gender}/{age}/{baseSalary}/{locationId}")
-//    public void updateEmployee(@PathVariable("employeeId") String employeeId, @PathVariable("employeeName") String employeeName,@PathVariable("gender") String gender,@PathVariable("age") String age,@PathVariable("baseSalary") String baseSalary, @PathVariable("locationId") String locationId) {
-//        employDBService.updateEmployee(employeeId,employeeName, gender,age,baseSalary,locationId);
-//    }
 
     //    页面
     @GetMapping("login")
