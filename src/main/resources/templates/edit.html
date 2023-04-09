@@ -66,6 +66,7 @@
     }
     async function add(){
         var employeeId2;
+
         if(!document.getElementById("edit1"))
             employeeId2 = document.getElementById("employeeId2").value;
         else employeeId2 = document.getElementById("employeeId1").innerHTML;
@@ -83,13 +84,20 @@
         var age2 = document.getElementById("age2").value;
         var baseSalary2 = document.getElementById("baseSalary2").value;
         var locationId2 = document.getElementById("locationId2").value;
-        if(employeeId2 != "" && employeeName2 != "") {
-            url = "http://localhost:8080/API/work1/edit/addEmployee" + "/" + employeeId2 + "/" + employeeName2 + "/" + gender2 + "/" + age2 + "/" + baseSalary2 + "/" + locationId2;
-            await fetch(url);
-            window.location="[[@{/API/work1/Manage}]]";
+
+        var locat = Number(locationId2);
+        if(locat >= 1 && locat <= 4) {
+            if(employeeId2 != "" && employeeName2 != "") {
+                url = "http://localhost:8080/API/work1/edit/addEmployee" + "/" + employeeId2 + "/" + employeeName2 + "/" + gender2 + "/" + age2 + "/" + baseSalary2 + "/" + locationId2;
+                await fetch(url);
+                window.location="[[@{/API/work1/Manage}]]";
+            }
+            else {
+                alert("不能为空！");
+            }
         }
         else {
-            alert("不能为空！");
+            alert("非法位置，请重新输入！");
         }
     }
      document.getElementById("moreLocation").onclick = function (){
